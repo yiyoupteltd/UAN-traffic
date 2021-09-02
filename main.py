@@ -27,6 +27,7 @@ import math
 from utils import *
 import attack_model
 from models import *
+from models import dla_simple
 #from pretrained_models_pytorch import pretrainedmodels
 
 parser = argparse.ArgumentParser()
@@ -121,7 +122,9 @@ if opt.netAttacker != '':
 print("=> creating model ")
 if opt.dataset == 'cifar10':
     checkpoint = torch.load(opt.netClassifier)
-    netClassifier = checkpoint['net']
+    net = dla_simple.SimpleDLA()
+    net = net.to('cpu')
+    netClassifier = net.load_state_dict(checkpoint['net'])
 
 elif opt.dataset == 'ImageNet':
     netClassifier = pretrainedmodels.__dict__[opt.netClassifier](num_classes=1000, pretrained='imagenet')
@@ -484,7 +487,7 @@ def test(epoch, c, noise):
         WriteToFile('./%s/log' %(opt.outf),  "Val Epoch %s batch_idx %s A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
 if __name__ == '__main__':
-    
+
     c = opt.shrink
     if opt.dataset == 'cifar10':
         min_val, max_val = find_boundaries(train_loader)

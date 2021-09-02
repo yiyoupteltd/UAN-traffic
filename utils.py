@@ -158,11 +158,11 @@ def find_boundaries(train_loader):
     curr_min = int(1e3)
     for batch_idx, (data, cls) in tqdm(enumerate(train_loader)):
         batch_size = data.size(0)
-        data = Variable(data).cuda()
-        prop_max = torch.max(data).data[0]
+        data = Variable(data)
+        prop_max = torch.max(data).item()
         if prop_max > curr_max:
             curr_max = prop_max
-        prop_min = torch.min(data).data[0]
+        prop_min = torch.min(data).item()
         if prop_min < curr_min:
             curr_min = prop_min
     return curr_min, curr_max 
