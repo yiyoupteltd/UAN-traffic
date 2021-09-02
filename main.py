@@ -124,7 +124,8 @@ if opt.dataset == 'cifar10':
     checkpoint = torch.load(opt.netClassifier)
     net = dla_simple.SimpleDLA()
     net = net.to('cpu')
-    netClassifier = net.load_state_dict(checkpoint['net'])
+    net.load_state_dict(checkpoint['net'])
+    netClassifier = net
 
 elif opt.dataset == 'ImageNet':
     netClassifier = pretrainedmodels.__dict__[opt.netClassifier](num_classes=1000, pretrained='imagenet')
@@ -498,6 +499,7 @@ if __name__ == '__main__':
         max_val = np.max((maxs-np.array(netClassifier.mean))/np.array(netClassifier.std))
     print(min_val, max_val)
     for epoch in range(1, opt.epochs + 1):
+        print(epoch)
         start = time.time()
         score, linf, l2 = train(epoch, c, noise)
         if linf > opt.max_norm:
