@@ -27,7 +27,7 @@ import math
 from utils import *
 import attack_model
 from models import *
-from pretrained_models_pytorch import pretrainedmodels
+#from pretrained_models_pytorch import pretrainedmodels
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=2)
@@ -54,7 +54,7 @@ parser.add_argument('--every', type=int, default=1, help='save if epoch is divis
 parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
 parser.add_argument('--imageSize', type=int, default=299, help='the height / width of the input image to network')
 parser.add_argument('--netAttacker', default='', help="path to netAttacker (to continue training)")
-parser.add_argument('--netClassifier', default='./checkpoint/ckpt.t7', help="For CIFAR-10: path to netClassifier (to get target model predictions) \
+parser.add_argument('--netClassifier', default='./checkpoint/ckpt.pth', help="For CIFAR-10: path to netClassifier (to get target model predictions) \
                                                                              For ImageNet: type of classifier (e.g. inceptionV3)")
 parser.add_argument('--outf', default='./logs', help='folder to output images and model checkpoints')
 parser.add_argument('--manualSeed', type=int, default=5198, help='manual seed')
