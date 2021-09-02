@@ -499,7 +499,7 @@ if __name__ == '__main__':
         max_val = np.max((maxs-np.array(netClassifier.mean))/np.array(netClassifier.std))
     print(min_val, max_val)
     for epoch in range(1, opt.epochs + 1):
-        print(epoch)
+        print('epoch: ' + str(epoch))
         start = time.time()
         score, linf, l2 = train(epoch, c, noise)
         if linf > opt.max_norm:
