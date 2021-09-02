@@ -27,7 +27,6 @@ import math
 from utils import *
 import attack_model
 from models import *
-from models import dla_simple
 #from pretrained_models_pytorch import pretrainedmodels
 
 parser = argparse.ArgumentParser()
@@ -122,7 +121,7 @@ if opt.netAttacker != '':
 print("=> creating model ")
 if opt.dataset == 'cifar10':
     checkpoint = torch.load(opt.netClassifier)
-    net = dla_simple.SimpleDLA()
+    net = DenseNet121()
     net = net.to('cpu')
     net.load_state_dict(checkpoint['net'])
     netClassifier = net
