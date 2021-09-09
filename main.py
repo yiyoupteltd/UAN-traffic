@@ -122,7 +122,7 @@ print("=> creating model ")
 if opt.dataset == 'cifar10':
     checkpoint = torch.load(opt.netClassifier)
     net = DenseNet121()
-    net = net.to('cpu')
+    net = net.to('cuda')
     net.load_state_dict(checkpoint['net'])
     netClassifier = net
 
