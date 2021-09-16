@@ -123,6 +123,8 @@ if opt.dataset == 'cifar10':
     checkpoint = torch.load(opt.netClassifier)
     net = DenseNet121()
     net = net.to('cuda')
+    net = torch.nn.DataParallel(net)
+    cudnn.benchmark = True
     net.load_state_dict(checkpoint['net'])
     netClassifier = net
 
