@@ -16,6 +16,7 @@ import torchvision.utils as vutils
 from torch.autograd import Variable
 from torchvision import models
 from torch.utils.data.sampler import SubsetRandomSampler, RandomSampler
+torch.cuda.empty_cache()
 
 import scipy.spatial
 from tqdm import tqdm
@@ -126,6 +127,8 @@ if opt.dataset == 'cifar10':
     net = torch.nn.DataParallel(net)
     cudnn.benchmark = True
     net.load_state_dict(checkpoint['net'])
+    torch.cuda.empty_cache()
+    print('debug: emptied cache after net!')
     netClassifier = net
 
 elif opt.dataset == 'ImageNet':
@@ -151,9 +154,9 @@ if opt.dataset == 'cifar10':
         transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
     ])
     trainset = dset.CIFAR10(root='./data', train=True, download=True, transform=transform_train)
-    train_loader = torch.utils.data.DataLoader(trainset, batch_size=opt.batchSize, shuffle=True, num_workers=2)
+    train_loader = torch.utils.data.DataLoader(trainset, batch_size=opt.batchSize, shuffle=True, num_workers=2, drop_last=True)
     testset = dset.CIFAR10(root='./data', train=False, download=True, transform=transform_test)
-    test_loader = torch.utils.data.DataLoader(testset, batch_size=opt.batchSize, shuffle=False, num_workers=2)
+    test_loader = torch.utils.data.DataLoader(testset, batch_size=opt.batchSize, shuffle=False, num_workers=2, drop_last=True)
     
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
@@ -219,7 +222,7 @@ def train(epoch, c, noise):
             cls = cls.cuda()
         inputv = Variable(inputv)
         targets = Variable(targets)
-
+        torch.cuda.empty_cache()
         prediction = netClassifier(inputv)
 
         # only computer adversarial examples on examples that are originally classified correctly        
@@ -254,11 +257,15 @@ def train(epoch, c, noise):
 
         # update sizes
         batch_size = inputv.size(0)
-        noise.data.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
-        targets.data.resize_(batch_size)
+        with torch.no_grad():
+            noise.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
+        with torch.no_grad():
+            targets.resize_(batch_size)
        
         # compute an adversarial example and its prediction 
         prediction = netClassifier(inputv)
+        netClassifier.eval()
+        netAttacker.eval()
         delta = netAttacker(noise)
         adv_sample_ = delta*c + inputv
         adv_sample = torch.clamp(adv_sample_, min_val, max_val) 
@@ -365,7 +372,7 @@ def train(epoch, c, noise):
             loss = classifier_loss + ldist_loss 
             loss.backward()
             optimizerAttacker.step()
-            c_loss.append(classifier_loss.data[0])
+            c_loss.append(classifier_loss.data.item())
         else:
             if opt.optimize_on_success == 1:
                 classifier_loss = success_loss
