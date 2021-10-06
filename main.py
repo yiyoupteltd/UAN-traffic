@@ -394,7 +394,7 @@ def train(epoch, c, noise):
             
         # log to file, saving for each batch
         progress_bar(batch_idx, len(train_loader), "Tr E%s, C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
-        #batch id, length of trainset, epoch, classifier loss of those not fooled (not successful), % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, 
+        #batch id, length of trainset, epoch, classifier loss of those not fooled (not successful), % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done)
         WriteToFile('./%s/log' %(opt.outf),  "Tr Epoch %s batch_idx %s C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
     # save model weights 
