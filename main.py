@@ -56,7 +56,7 @@ parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use')
 parser.add_argument('--every', type=int, default=1, help='save if epoch is divisible by this')
 parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
 parser.add_argument('--imageSize', type=int, default=299, help='the height / width of the input image to network')
-parser.add_argument('--netAttacker', default='', help="path to netAttacker (to continue training)")
+parser.add_argument('--netAttacker', default='./resnet-results/netAttacker_4.pth', help="path to netAttacker (to continue training)")
 parser.add_argument('--netClassifier', default='./checkpoint/ckpt.pth', help="For CIFAR-10: path to netClassifier (to get target model predictions) \
                                                                              For ImageNet: type of classifier (e.g. inceptionV3)")
 parser.add_argument('--outf', default='./logs', help='folder to output images and model checkpoints')
@@ -120,6 +120,7 @@ netAttacker = attack_model._netAttacker(ngpu, opt.imageSize)
 netAttacker.apply(weights_init)
 if opt.netAttacker != '':
     netAttacker.load_state_dict(torch.load(opt.netAttacker))
+    print("Net attacker loaded!!\n")
 
 print("=> creating model ")
 if opt.dataset == 'cifar10':
@@ -463,8 +464,10 @@ def test(epoch, c, noise):
             cls = torch.index_select(cls, 0, ids)
 
         batch_size = inputv.size(0)
-        noise.data.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
-        targets.data.resize_(batch_size)
+        with torch.no_grad():
+            noise.data.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
+        with torch.no_grad():
+            targets.data.resize_(batch_size)
         
         # compute an adversarial example and its prediction 
         prediction = netClassifier(inputv)
@@ -475,13 +478,13 @@ def test(epoch, c, noise):
         
         #try to get predictions of clean ------------------------------------
         prediction = netClassifier(inputv)
-        print('clean prediction: ' + prediction + ' --------------------------------')
+        print(Fore.LIGHTCYAN_EX + 'clean prediction: ' + prediction + ' --------------------------------')
         vutils.save_image(torch.cat((inputv)), './{}/{}_clean.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
         WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s" %(batch_idx, prediction))
         
         #try to get prediction of perturbed ----------------------------------
         adv_prediction = netClassifier(adv_sample)
-        print('perturbed prediction: ' + adv_prediction + ' --------------------------------')
+        print(Fore.LIGHTRED_EX + 'perturbed prediction: ' + adv_prediction + ' --------------------------------')
         vutils.save_image(torch.cat((adv_sample)), './{}/{}_perturbed.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
         WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s" %(batch_idx, adv_prediction))
         vutils.save_image(torch.cat((inputv,pert,adv_sample)), './{}/{}_combined.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
