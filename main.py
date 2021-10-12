@@ -544,7 +544,7 @@ if __name__ == '__main__':
         min_val = np.min((mins-np.array(netClassifier.mean))/np.array(netClassifier.std))
         max_val = np.max((maxs-np.array(netClassifier.mean))/np.array(netClassifier.std))
     print(min_val, max_val)
-    for epoch in range(1, opt.epochs + 1):
+    for epoch in range(5, opt.epochs + 1):
         print('epoch: ' + str(epoch))
         start = time.time()
         score, linf, l2 = train(epoch, c, noise)
