@@ -18,6 +18,8 @@ from torchvision import models
 from torch.utils.data.sampler import SubsetRandomSampler, RandomSampler
 torch.cuda.empty_cache()
 
+from colorama import *
+
 import scipy.spatial
 from tqdm import tqdm
 from collections import defaultdict
@@ -240,7 +242,7 @@ def train(epoch, c, noise):
                 correct_idxs = torch.LongTensor(correct_idxs)
                 if opt.cuda:
                     correct_idxs = correct_idxs.cuda()
-                inputv = torch.index_select(inputv, 0, Variable(correct_idxs))
+                inputv = torch.index_select(inputv, 0, Variable(correct_idxs)) #inputv updated to now only focus on those correctly predicted by DenseNet
                 prediction = torch.index_select(prediction, 0, Variable(correct_idxs)) #only correct predictions by DenseNet is kept in prediction
                 cls = torch.index_select(cls, 0, correct_idxs)
 
@@ -285,7 +287,7 @@ def train(epoch, c, noise):
         if len(no_idx) != inputv.size(0):
             yes_idx = np.setdiff1d(np.array(range(inputv.size(0))), no_idx) #yes_idx is those adversarial examples who have successfully fooled DenseNet
             for i, adv_idx in enumerate(yes_idx):
-                print('In training for those UAN successfully fooled DenseNet:  ' + i + adv_idx + ' of batch ' + batch_idx) #code
+                print(Fore.LIGHTGREEN_EX + 'In training for those UAN successfully fooled DenseNet:  ' + i + adv_idx + ' of batch ' + batch_idx) #code
                 clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
                 adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
                 pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize) #UAN vector = clean - perturbed image 
@@ -309,7 +311,7 @@ def train(epoch, c, noise):
                 L_inf.append(linf)
 
                 if batch_idx == 0: #batch_idx of trainset - why only 1 batch id? Code suggestion: Remove this, save for all batches
-                    #only for training set, consider using similar method for test 
+                    #only for training set, consider using similar method for test-------------------------------------------- 
                     vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}.png'.format(opt.outf, epoch, i), normalize=True, scale_each=True)
                     #could only 1 i being produced mean only 1 image is successfully fooled?
    
@@ -397,12 +399,12 @@ def train(epoch, c, noise):
         #batch id, length of trainset, epoch, classifier loss of those not fooled (not successful), % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done)
         WriteToFile('./%s/log' %(opt.outf),  "Tr Epoch %s batch_idx %s C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
-    # save model weights 
+    # save attack model weights with its epoch
     if epoch % opt.every == 0:
         torch.save(netAttacker.state_dict(), '%s/netAttacker_%s.pth' % (opt.outf, epoch))
 
     return success_count/total_count, np.mean(L_inf), np.mean(dist)
-
+    # % successfully perturbed, loss of those successfully fooled, -distance
 
 def test(epoch, c, noise):
     netAttacker.eval()
@@ -429,9 +431,11 @@ def test(epoch, c, noise):
             cls = cls.cuda()
         targets = Variable(targets)
         
-        prediction = netClassifier(inputv)
+        prediction = netClassifier(inputv) #prediction is the set of data that is predicted by the DenseNet
         
+        # only computer adversarial examples on examples that are originally classified correctly        
         if opt.restrict_to_correct_preds == 1:
+            # get indexes where the original predictions are incorrect
             incorrect_idxs = np.array( np.where(prediction.data.max(1)[1].eq(cls).cpu().numpy() == 0))[0].astype(int)
             skipped += incorrect_idxs.shape[0]
             no_skipped += (batch_size - incorrect_idxs.shape[0])
@@ -439,12 +443,13 @@ def test(epoch, c, noise):
                 print("All original predictions were incorrect! Skipping batch!")
                 continue
             elif incorrect_idxs.shape[0] > 0 and incorrect_idxs.shape[0] < batch_size:
+                # get indexes of the correct predictions and filter out the incorrect indexes
                 correct_idxs = np.setdiff1d( np.arange(batch_size), incorrect_idxs)
                 correct_idxs = torch.LongTensor(correct_idxs)
                 if opt.cuda:
                     correct_idxs = correct_idxs.cuda()
-                inputv = torch.index_select(inputv, 0, Variable(correct_idxs))
-                prediction = torch.index_select(prediction, 0, Variable(correct_idxs))
+                inputv = torch.index_select(inputv, 0, Variable(correct_idxs)) #inputv updated to now only focus on those correctly predicted by DenseNet
+                prediction = torch.index_select(prediction, 0, Variable(correct_idxs)) #only correct predictions by DenseNet is kept in prediction
                 cls = torch.index_select(cls, 0, correct_idxs)
         # remove samples that are of the target class
         if opt.targeted == 1:
@@ -461,25 +466,45 @@ def test(epoch, c, noise):
         noise.data.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
         targets.data.resize_(batch_size)
         
+        # compute an adversarial example and its prediction 
         prediction = netClassifier(inputv)
         delta = netAttacker(noise)
         adv_sample_ = delta*c + inputv
         adv_sample = torch.clamp(adv_sample_, min_val, max_val) 
-        adv_prediction = netClassifier(adv_sample)
+        adv_prediction = netClassifier(adv_sample) #adversarial UAN prediction using DenseNet?------------------------------------------------
         
+        #try to get predictions of clean ------------------------------------
+        prediction = netClassifier(inputv)
+        print('clean prediction: ' + prediction + ' --------------------------------')
+        vutils.save_image(torch.cat((inputv)), './{}/{}_clean.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
+        WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s" %(batch_idx, prediction))
+        
+        #try to get prediction of perturbed ----------------------------------
+        adv_prediction = netClassifier(adv_sample)
+        print('perturbed prediction: ' + adv_prediction + ' --------------------------------')
+        vutils.save_image(torch.cat((adv_sample)), './{}/{}_perturbed.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
+        WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s" %(batch_idx, adv_prediction))
+        vutils.save_image(torch.cat((inputv,pert,adv_sample)), './{}/{}_combined.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
+
+
+        # get indexes of failed adversarial examples, and store in no_idx
         if opt.targeted == 1:
             no_idx = np.array( np.where(adv_prediction.data.max(1)[1].eq(targets.data).cpu().numpy() == 0))[0].astype(int)
         else:
             no_idx = np.array( np.where(adv_prediction.data.max(1)[1].eq(prediction.data.max(1)[1]).cpu().numpy() == 1))[0].astype(int)
   
+        # update success and total counts
         success_count += inputv.size(0) - len(no_idx)
-        total_count += inputv.size(0)     
+        total_count += inputv.size(0)   
+
+        # if there are any adversarial examples, compute distance and update norms, and save image  
         if len(no_idx) != inputv.size(0):
-            yes_idx = np.setdiff1d(np.array(range(inputv.size(0))), no_idx)
+            yes_idx = np.setdiff1d(np.array(range(inputv.size(0))), no_idx) #yes_idx is those adversarial examples who have successfully fooled DenseNet
             for i, adv_idx in enumerate(yes_idx):
-                clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize)
-                adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize)
-                pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  
+                print(Fore.LIGHTGREEN_EX + 'In test for those UAN successfully fooled DenseNet:  ' + i + adv_idx + ' of batch ' + batch_idx) #code
+                clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
+                adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
+                pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  #UAN vector = clean - perturbed image 
                 
                 if opt.dataset == 'cifar10': 
                     adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
@@ -488,7 +513,7 @@ def test(epoch, c, noise):
                     adv_ = rescale(adv_sample[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
                     clean_ = rescale(inputv[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
 
-                linf = torch.max(torch.abs(adv_ - clean_)).data.cpu().numpy()
+                linf = torch.max(torch.abs(adv_ - clean_)).data.cpu().numpy() #linf = perturbed image - clean image
                 noise_norm = torch.sqrt(torch.sum( (clean_[:, :, :] - adv_[:, :, :])**2  )).data.cpu().numpy()
                 image_norm = torch.sqrt(torch.sum( clean_[:, :, :]**2 )).data.cpu().numpy()
                 adv_norm_s   = torch.sqrt(torch.sum( adv_[:, :, :]**2 )).data.cpu().numpy()
@@ -498,9 +523,12 @@ def test(epoch, c, noise):
                 non_adv_norm.append(image_norm)
                 adv_norm.append(adv_norm_s)
                 L_inf.append(linf)
-                
+
+        #no image saved here, unlike train ---------------------------------------------------------------------------------------------------------        
         progress_bar(batch_idx, len(test_loader), "Val E%s, A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
+        #batch id, length of testset, epoch, % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done) should not be skipped for test
         WriteToFile('./%s/log' %(opt.outf),  "Val Epoch %s batch_idx %s A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
+
 
 if __name__ == '__main__':
 
@@ -517,12 +545,16 @@ if __name__ == '__main__':
         print('epoch: ' + str(epoch))
         start = time.time()
         score, linf, l2 = train(epoch, c, noise)
+        # % successfully perturbed, loss of those successfully fooled, -distance
         if linf > opt.max_norm:
+            print(Fore.LIGHTCYAN_EX + 'debug: loss > max allowed perturbation in train -----------------')
             break
         if l2 > opt.max_norm:
+            print(Fore.LIGHTCYAN_EX + 'debug: distance > max allowed perturbation in train -----------------')
             break
         end = time.time()
         if score >= 1.00:
+            print(Fore.LIGHTCYAN_EX + 'debug: all successfully perturbed in train ---------------------------')
             break
         if epoch == 1:
             curr_pred = score
