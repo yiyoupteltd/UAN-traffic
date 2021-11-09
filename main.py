@@ -66,12 +66,6 @@ parser.add_argument('--dataset', type=str, default='ImageNet', help='dataset ima
 opt = parser.parse_args()
 print(opt)
 
-try:
-    os.makedirs(opt.outf)
-    os.makedirs('classifications')
-except OSError:
-    pass
-
 WriteToFile('./%s/log' %(opt.outf), opt)
 WriteToFile('./%s/classifications' %(opt.outf), opt)
 
