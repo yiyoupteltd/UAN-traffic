@@ -56,7 +56,7 @@ parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use')
 parser.add_argument('--every', type=int, default=1, help='save if epoch is divisible by this')
 parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
 parser.add_argument('--imageSize', type=int, default=299, help='the height / width of the input image to network')
-parser.add_argument('--netAttacker', default='./resnet-results/netAttacker_4.pth', help="path to netAttacker (to continue training)")
+parser.add_argument('--netAttacker', default='', help="path to netAttacker (to continue training)")
 parser.add_argument('--netClassifier', default='./checkpoint/ckpt.pth', help="For CIFAR-10: path to netClassifier (to get target model predictions) \
                                                                              For ImageNet: type of classifier (e.g. inceptionV3)")
 parser.add_argument('--outf', default='./logs', help='folder to output images and model checkpoints')
@@ -125,19 +125,15 @@ if opt.netAttacker != '':
     print("Net attacker loaded!!\n")
 
 print("=> creating model ")
-if opt.dataset == 'cifar10':
-    checkpoint = torch.load(opt.netClassifier)
-    net = DenseNet121()
-    net = net.to('cuda')
-    net = torch.nn.DataParallel(net)
-    cudnn.benchmark = True
-    net.load_state_dict(checkpoint['net'])
-    torch.cuda.empty_cache()
-    print('debug: emptied cache after net!')
-    netClassifier = net
-
-elif opt.dataset == 'ImageNet':
-    netClassifier = pretrainedmodels.__dict__[opt.netClassifier](num_classes=1000, pretrained='imagenet')
+checkpoint = torch.load(opt.netClassifier)
+net = DenseNet121()
+net = net.to('cuda')
+net = torch.nn.DataParallel(net)
+cudnn.benchmark = True
+net.load_state_dict(checkpoint['net'])
+torch.cuda.empty_cache()
+print('debug: emptied cache after net!')
+netClassifier = net
 
 
 if opt.cuda:
@@ -146,59 +142,30 @@ if opt.cuda:
 
 
 print('==> Preparing data..')
-if opt.dataset == 'cifar10':
-    transform_train = transforms.Compose([
+transform_train = transforms.Compose([
         transforms.Scale((opt.imageSize,opt.imageSize)),
         transforms.ToTensor(),
         transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
     ])
-    
-    transform_test = transforms.Compose([
-        transforms.Scale((opt.imageSize,opt.imageSize)),
-        transforms.ToTensor(),
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-    ])
-    trainset = dset.CIFAR10(root='./data', train=True, download=True, transform=transform_train)
-    train_loader = torch.utils.data.DataLoader(trainset, batch_size=opt.batchSize, shuffle=True, num_workers=2, drop_last=True)
-    testset = dset.CIFAR10(root='./data', train=False, download=True, transform=transform_test)
-    test_loader = torch.utils.data.DataLoader(testset, batch_size=opt.batchSize, shuffle=False, num_workers=2, drop_last=True)
-    
-    classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+transform_test = transforms.Compose([
+    transforms.Scale((opt.imageSize,opt.imageSize)),
+    transforms.ToTensor(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+])
+
+#loading of image data. Image data consits of batch_idx, input (image), targets (correct classification - groundtruth)
+trainset = dset.ImageFolder(root = './data/train', transform = transform_train)
+trainloader = torch.utils.data.DataLoader(
+    trainset, batch_size=opt.batchSize, shuffle=True, num_workers=2)
 
 
+testset = dset.ImageFolder(root = './data/test', transform = transform_test)
+testloader = torch.utils.data.DataLoader(
+    testset, batch_size=opt.batchSize, shuffle=False, num_workers=2)
 
-elif opt.dataset == 'ImageNet':
-    normalize = transforms.Normalize(mean=netClassifier.mean,
-                                     std=netClassifier.std)
- 
-    idx = np.arange(50000)
-    np.random.shuffle(idx)
-    training_idx = idx[:40000]
-    test_idx = idx[40000:]
-    
-    train_loader = torch.utils.data.DataLoader(
-        dset.ImageFolder('./imagenet/data/val/', transforms.Compose([
-            transforms.Scale(round(max(netClassifier.input_size)*1.050)),
-            transforms.CenterCrop(max(netClassifier.input_size)),
-            transforms.ToTensor(),
-            ToSpaceBGR(netClassifier.input_space=='BGR'),
-            ToRange255(max(netClassifier.input_range)==255),
-            normalize,
-        ])),
-        batch_size=opt.batchSize, shuffle=False, sampler=SubsetRandomSampler(training_idx),
-        num_workers=opt.workers, pin_memory=True)
- 
-    test_loader = torch.utils.data.DataLoader(
-        dset.ImageFolder('./imagenet/data/val/', transforms.Compose([
-            transforms.Scale(round(max(netClassifier.input_size)*1.050)),
-            transforms.CenterCrop(max(netClassifier.input_size)),
-            transforms.ToTensor(),
-            ToSpaceBGR(netClassifier.input_space=='BGR'),
-            ToRange255(max(netClassifier.input_range)==255),
-            normalize,
-        ])),
-        batch_size=opt.batchSize, shuffle=False, sampler=SubsetRandomSampler(test_idx),
-        num_workers=opt.workers, pin_memory=True)
+classes = ('black', 'green','red', 'yellow')
+
  
 # setup optimizer
 optimizerAttacker = optim.Adam(netAttacker.parameters(), lr=opt.lr, betas=(opt.beta1, 0.999), weight_decay=opt.l2reg)
@@ -216,7 +183,7 @@ def train(epoch, c, noise):
     c_loss, L_inf, L2, pert_norm, dist, adv_norm, non_adv_norm = [ ], [ ], [ ], [ ], [ ], [ ], [ ] 
     total_count, success_count, skipped, no_skipped = 0, 0, 0, 0
      
-    for batch_idx, (inputv, cls) in enumerate(train_loader):
+    for batch_idx, (inputv, cls) in enumerate(trainloader):
         #train loader refers to the training set
         optimizerAttacker.zero_grad() #optimizerAttacker is the UAN attack model
         batch_size = inputv.size(0)
@@ -294,13 +261,9 @@ def train(epoch, c, noise):
                 clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
                 adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
                 pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  #UAN vector = clean - perturbed image 
-               
-                if opt.dataset == 'cifar10': 
-                    adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
-                    clean_ = rescale(inputv[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
-                elif opt.dataset == 'ImageNet': 
-                    adv_ = rescale(adv_sample[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
-                    clean_ = rescale(inputv[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
+ 
+                adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
+                clean_ = rescale(inputv[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
                 
                 linf = torch.max(torch.abs(adv_ - clean_)).data.cpu().numpy() #linf = perturbed image - clean image
                 noise_norm = torch.sqrt(torch.sum( (clean_[:, :, :] - adv_[:, :, :])**2  )).data.cpu().numpy()
@@ -398,7 +361,7 @@ def train(epoch, c, noise):
                 c_loss.append(0)
             
         # log to file,  saving for each batch
-        progress_bar(batch_idx, len(train_loader), "Tr E%s, C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
+        progress_bar(batch_idx, len(trainloader), "Tr E%s, C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
         #batch id, length of trainset, epoch, classifier loss of those not fooled (not successful), % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done)
         WriteToFile('./%s/log' %(opt.outf),  "Tr Epoch %s batch_idx %s C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
@@ -422,7 +385,7 @@ def test(epoch, c, noise):
     success_count = 0
     skipped = 0
     no_skipped = 0
-    for batch_idx, (inputv, cls) in enumerate(test_loader):
+    for batch_idx, (inputv, cls) in enumerate(testloader):
         if opt.cuda:
             inputv = inputv.cuda()
         inputv = Variable(inputv)
@@ -496,14 +459,10 @@ def test(epoch, c, noise):
                 clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
                 adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
                 pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  #UAN vector = clean - perturbed image 
-                
-                if opt.dataset == 'cifar10': 
-                    adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
-                    clean_ = rescale(inputv[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
-                elif opt.dataset == 'ImageNet': 
-                    adv_ = rescale(adv_sample[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
-                    clean_ = rescale(inputv[adv_idx], mean=netClassifier.mean, std=netClassifier.std)
 
+                adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
+                clean_ = rescale(inputv[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
+                
                 linf = torch.max(torch.abs(adv_ - clean_)).data.cpu().numpy() #linf = perturbed image - clean image
                 noise_norm = torch.sqrt(torch.sum( (clean_[:, :, :] - adv_[:, :, :])**2  )).data.cpu().numpy()
                 image_norm = torch.sqrt(torch.sum( clean_[:, :, :]**2 )).data.cpu().numpy()
@@ -532,7 +491,7 @@ def test(epoch, c, noise):
                     vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}combined.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
                 
         #no image saved here, unlike train ---------------------------------------------------------------------------------------------------------        
-        progress_bar(batch_idx, len(test_loader), "Val E%s, A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
+        progress_bar(batch_idx, len(testloader), "Val E%s, A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
         #batch id, length of testset, epoch, % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done) should not be skipped for test
         WriteToFile('./%s/log' %(opt.outf),  "Val Epoch %s batch_idx %s A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
@@ -540,15 +499,9 @@ def test(epoch, c, noise):
 if __name__ == '__main__':
 
     c = opt.shrink
-    if opt.dataset == 'cifar10':
-        min_val, max_val = find_boundaries(train_loader)
-    elif opt.dataset == 'ImageNet':
-        mins = np.array([netClassifier.input_range[0]]*3)
-        maxs = np.array([netClassifier.input_range[1]]*3)
-        min_val = np.min((mins-np.array(netClassifier.mean))/np.array(netClassifier.std))
-        max_val = np.max((maxs-np.array(netClassifier.mean))/np.array(netClassifier.std))
+    min_val, max_val = find_boundaries(trainloader)
     print(min_val, max_val)
-    for epoch in range(5, opt.epochs + 1):
+    for epoch in range(1, opt.epochs + 1):
         print('epoch: ' + str(epoch))
         start = time.time()
         score, linf, l2 = train(epoch, c, noise)
