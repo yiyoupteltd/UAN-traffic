@@ -68,10 +68,12 @@ print(opt)
 
 try:
     os.makedirs(opt.outf)
+    os.makedirs('classifications')
 except OSError:
     pass
 
 WriteToFile('./%s/log' %(opt.outf), opt)
+WriteToFile('./%s/classifications' %(opt.outf), opt)
 
 
 class ToSpaceBGR(object):
@@ -282,16 +284,16 @@ def train(epoch, c, noise):
 
         # update success and total counts         
         success_count += inputv.size(0) - len(no_idx) #success count refers to the number of images successfully perturbed
-        total_count += inputv.size(0) #total count measures the number of images tested    
+        total_count += inputv.size(0)     #total count measures the number of images tested 
 
         # if there are any adversarial examples, compute distance and update norms, and save image
         if len(no_idx) != inputv.size(0):
             yes_idx = np.setdiff1d(np.array(range(inputv.size(0))), no_idx) #yes_idx is those adversarial examples who have successfully fooled DenseNet
             for i, adv_idx in enumerate(yes_idx):
-                print(Fore.LIGHTGREEN_EX + 'In training for those UAN successfully fooled DenseNet:  ' + i + adv_idx + ' of batch ' + batch_idx) #code
+                print(Fore.LIGHTGREEN_EX + 'In training for those UAN successfully fooled DenseNet:  ' + str(i) + str(adv_idx) + ' of batch ' + str(batch_idx)) #code
                 clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
                 adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
-                pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize) #UAN vector = clean - perturbed image 
+                pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  #UAN vector = clean - perturbed image 
                
                 if opt.dataset == 'cifar10': 
                     adv_ = rescale(adv_sample[adv_idx], mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010))
@@ -312,10 +314,10 @@ def train(epoch, c, noise):
                 L_inf.append(linf)
 
                 if batch_idx == 0: #batch_idx of trainset - why only 1 batch id? Code suggestion: Remove this, save for all batches
-                    #only for training set, consider using similar method for test-------------------------------------------- 
+                    #only for training set, consider using similar method for test--------------------------------------------
                     vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}.png'.format(opt.outf, epoch, i), normalize=True, scale_each=True)
                     #could only 1 i being produced mean only 1 image is successfully fooled?
-   
+
         # if opt.optimize_on_success == 0, we do not optimize on already successfully computed adversarial examples
         # we remove them from consideration 
         if opt.optimize_on_success == 0:
@@ -355,7 +357,7 @@ def train(epoch, c, noise):
             #adv_prediction_np = adv_prediction.data.cpu().numpy()
             adv_prediction_np = adv_prediction_softmax.data.cpu().numpy()
             curr_adv_label = Variable(torch.LongTensor( np.array( [arr.argsort()[-1] for arr in adv_prediction_np] ) ) )
-            #prediction labels?---------------------------------------------------------------------------
+            #prediction labels?---------------------------------------------------------------------------   
             if opt.targeted == 1:
                 targ_adv_label = Variable(torch.LongTensor( np.array( [targets.data[i] for i, arr in enumerate(adv_prediction_np)] ) ) )
             else:
@@ -368,9 +370,9 @@ def train(epoch, c, noise):
             if opt.optimize_on_success == 1:
                  classifier_loss = torch.mean( torch.log(curr_adv_pred)-torch.log(targ_adv_pred) ) + success_loss
             else:
-                 classifier_loss = torch.mean( torch.log(curr_adv_pred)-torch.log(targ_adv_pred) ) # classifier loss = difference between the 2 predictions
+                 classifier_loss = torch.mean( torch.log(curr_adv_pred)-torch.log(targ_adv_pred) )
                  #classifier_loss = size of those not successfully fooled
-    
+
             if opt.norm == 'linf':
                 ldist_loss = opt.ldist_weight*torch.max(torch.abs(adv_sample - inputv)) #ldist loss = adversarial image - origianl image
             elif opt.norm == 'l2':
@@ -395,12 +397,12 @@ def train(epoch, c, noise):
             else:
                 c_loss.append(0)
             
-        # log to file, saving for each batch
+        # log to file,  saving for each batch
         progress_bar(batch_idx, len(train_loader), "Tr E%s, C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
         #batch id, length of trainset, epoch, classifier loss of those not fooled (not successful), % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done)
         WriteToFile('./%s/log' %(opt.outf),  "Tr Epoch %s batch_idx %s C_L %.5f A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, batch_idx, np.mean(c_loss), success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped))))
 
-    # save attack model weights with its epoch
+    # save attack model weights with its epoch 
     if epoch % opt.every == 0:
         torch.save(netAttacker.state_dict(), '%s/netAttacker_%s.pth' % (opt.outf, epoch))
 
@@ -434,7 +436,7 @@ def test(epoch, c, noise):
         
         prediction = netClassifier(inputv) #prediction is the set of data that is predicted by the DenseNet
         
-        # only computer adversarial examples on examples that are originally classified correctly        
+        # only computer adversarial examples on examples that are originally classified correctly 
         if opt.restrict_to_correct_preds == 1:
             # get indexes where the original predictions are incorrect
             incorrect_idxs = np.array( np.where(prediction.data.max(1)[1].eq(cls).cpu().numpy() == 0))[0].astype(int)
@@ -465,46 +467,32 @@ def test(epoch, c, noise):
 
         batch_size = inputv.size(0)
         with torch.no_grad():
-            noise.data.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
+            noise.resize_(batch_size, opt.nz, 1, 1).normal_(0, 0.5)
         with torch.no_grad():
-            targets.data.resize_(batch_size)
+            targets.resize_(batch_size)
         
-        # compute an adversarial example and its prediction 
+         # compute an adversarial example and its prediction
         prediction = netClassifier(inputv)
         delta = netAttacker(noise)
         adv_sample_ = delta*c + inputv
         adv_sample = torch.clamp(adv_sample_, min_val, max_val) 
         adv_prediction = netClassifier(adv_sample) #adversarial UAN prediction using DenseNet?------------------------------------------------
         
-        #try to get predictions of clean ------------------------------------
-        prediction = netClassifier(inputv)
-        print(Fore.LIGHTCYAN_EX + 'clean prediction: ' + prediction + ' --------------------------------')
-        vutils.save_image(torch.cat((inputv)), './{}/{}_clean.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
-        WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s" %(batch_idx, prediction))
-        
-        #try to get prediction of perturbed ----------------------------------
-        adv_prediction = netClassifier(adv_sample)
-        print(Fore.LIGHTRED_EX + 'perturbed prediction: ' + adv_prediction + ' --------------------------------')
-        vutils.save_image(torch.cat((adv_sample)), './{}/{}_perturbed.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
-        WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s" %(batch_idx, adv_prediction))
-        vutils.save_image(torch.cat((inputv,pert,adv_sample)), './{}/{}_combined.png'.format('classifications', batch_idx), normalize=True, scale_each=True)
-
-
         # get indexes of failed adversarial examples, and store in no_idx
         if opt.targeted == 1:
             no_idx = np.array( np.where(adv_prediction.data.max(1)[1].eq(targets.data).cpu().numpy() == 0))[0].astype(int)
         else:
             no_idx = np.array( np.where(adv_prediction.data.max(1)[1].eq(prediction.data.max(1)[1]).cpu().numpy() == 1))[0].astype(int)
-  
+
         # update success and total counts
         success_count += inputv.size(0) - len(no_idx)
-        total_count += inputv.size(0)   
+        total_count += inputv.size(0)
 
-        # if there are any adversarial examples, compute distance and update norms, and save image  
+        # if there are any adversarial examples, compute distance and update norms, and save image   
         if len(no_idx) != inputv.size(0):
             yes_idx = np.setdiff1d(np.array(range(inputv.size(0))), no_idx) #yes_idx is those adversarial examples who have successfully fooled DenseNet
             for i, adv_idx in enumerate(yes_idx):
-                print(Fore.LIGHTGREEN_EX + 'In test for those UAN successfully fooled DenseNet:  ' + i + adv_idx + ' of batch ' + batch_idx) #code
+                print(Fore.LIGHTGREEN_EX + 'In test for those UAN successfully fooled DenseNet:  ' + str(i) + str(adv_idx) + ' of batch ' + str(batch_idx)) #code
                 clean = inputv[adv_idx].data.view(1, nc, opt.imageSize ,opt.imageSize) #clean image
                 adv = adv_sample[adv_idx].data.view(1, nc, opt.imageSize, opt.imageSize) #perturbed image
                 pert = (inputv[adv_idx]-adv_sample[adv_idx]).data.view(1, nc, opt.imageSize, opt.imageSize)  #UAN vector = clean - perturbed image 
@@ -526,7 +514,23 @@ def test(epoch, c, noise):
                 non_adv_norm.append(image_norm)
                 adv_norm.append(adv_norm_s)
                 L_inf.append(linf)
-
+                
+                if batch_idx <= 20:
+                    #for i, adv_idx in enumerate(batch_idx):
+                        #try to get predictions of clean ------------------------------------
+            
+                    prediction = netClassifier(clean)
+                    print(Fore.LIGHTCYAN_EX + 'clean prediction: ' + str(prediction) + ' --------------------------------')
+                    vutils.save_image(clean, './{}/{}_{}_clean.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                    WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s, with predicted class %s" %(batch_idx, prediction,prediction.data.max(1)[1]))
+                    
+                    #try to get prediction of perturbed ----------------------------------
+                    adv_prediction = netClassifier(adv)
+                    print(Fore.LIGHTRED_EX + 'perturbed prediction: ' + str(adv_prediction) + ' --------------------------------')
+                    vutils.save_image(adv, './{}/{}_{}_perturbed.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                    WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s with predicted class %s" %(batch_idx, adv_prediction, adv_prediction.data.max(1)[1]))
+                    vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}combined.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                
         #no image saved here, unlike train ---------------------------------------------------------------------------------------------------------        
         progress_bar(batch_idx, len(test_loader), "Val E%s, A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
         #batch id, length of testset, epoch, % successfully perturbed, loss of those successfully fooled, -distance, -pert norm, -adv norm, -non_adv norm, c (scale of perturbation), skipped % where the original predictions are incorrect (attack not done) should not be skipped for test

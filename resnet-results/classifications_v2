@@ -1,0 +1,214 @@
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='cifar10', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='./resnet-results/netAttacker_4.pth', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='cifar10', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='./resnet-results/netAttacker_4.pth', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+ Original prediction of clean for batch idx 0 : tensor([[ 2.8735, -2.1238,  2.2759, -0.2200,  0.7152, -3.3347,  0.8448, -3.2177,
+          3.5498, -1.3628],
+        [ 2.7262, -1.9790, -1.8165,  1.4938,  2.0524, -0.2243, -1.8237, -5.6096,
+          6.4752, -1.2938]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.3573, -1.2468,  1.3378,  4.4785,  0.1829, -0.0575, -0.7823, -1.1463,
+          4.3244, -1.7331],
+        [-6.9623, -1.5699,  5.5654,  6.1059,  2.7659, -2.7417, -2.7742, -2.3803,
+          2.5328, -0.5413]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 0 : tensor([[ 2.8735, -2.1238,  2.2759, -0.2200,  0.7152, -3.3347,  0.8448, -3.2177,
+          3.5498, -1.3628],
+        [ 3.1647, -2.3173,  3.1374,  0.0109, -0.0268, -2.9124,  1.1481, -3.2500,
+          2.4077, -1.3621]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.3573, -1.2468,  1.3378,  4.4785,  0.1829, -0.0575, -0.7823, -1.1463,
+          4.3244, -1.7331],
+        [-5.4707, -0.7271,  1.1472,  4.9863, -0.9686,  0.4270, -0.1652, -1.5523,
+          4.4351, -2.1113]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 2 : tensor([[ 2.6087, -3.3048,  4.0040,  1.1039, -0.3985, -1.9770,  2.7220, -3.9933,
+          1.6948, -2.4598]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 2 : tensor([[-6.1322e+00, -8.9359e-01,  1.4393e+00,  5.6079e+00, -3.0924e-05,
+          3.2217e-01, -4.2411e-01, -1.5463e+00,  3.8903e+00, -2.2631e+00]],
+       device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 4 : tensor([[ 2.7689, -2.4781,  2.6552, -0.1945,  0.5273, -2.7431,  0.9986, -3.1596,
+          2.9239, -1.2984]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 4 : tensor([[-5.0948, -0.6414,  1.1629,  4.7724, -0.6203,  0.6226, -0.4842, -1.8189,
+          3.9269, -1.8248]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 6 : tensor([[-3.0486, -3.3050,  8.8314,  1.9622,  1.5113, -0.7963,  2.2847, -0.9617,
+         -2.3902, -4.0877],
+        [ 2.7246, -2.9264,  3.5667,  0.7565, -0.3863, -2.4371,  2.2631, -3.4042,
+          1.9993, -2.1562]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 6 : tensor([[-10.0839,  -1.1643,   7.3722,   6.6603,   2.2021,   0.0745,  -3.6749,
+          -1.1810,   2.2157,  -2.4203],
+        [ -6.3545,  -0.8396,   1.9195,   5.6968,  -1.1587,   0.2974,  -0.1506,
+          -1.5094,   5.0140,  -2.9147]], device='cuda:0',
+       grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 8 : tensor([[ 2.7655, -3.1887,  3.2523,  0.7987,  0.1029, -2.1479,  1.9833, -3.6023,
+          2.2115, -2.1750]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 8 : tensor([[-6.1056, -0.9610,  1.5521,  5.4721, -0.2887,  0.5281, -0.2045, -1.3805,
+          4.0507, -2.6624]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 13 : tensor([[-7.0388, -2.8515,  4.8914,  7.6098,  7.2327,  4.3871, -0.6357, -1.2656,
+         -7.1966, -5.1322],
+        [ 3.0899, -1.8198,  2.9719, -0.5785,  0.4211, -3.5480,  0.9164, -2.8060,
+          2.6616, -1.3085],
+        [ 1.8455, -0.2951,  1.3167, -1.1509, -1.1621, -0.9788, -1.5208, -3.7210,
+          5.6516,  0.0155]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-10.9093,  -1.8521,   8.5514,   8.5559,   3.3396,  -2.6814,  -2.7627,
+          -2.9307,   1.9571,  -1.2673],
+        [ -5.2711,  -0.6255,   1.1979,   4.8589,  -0.6069,   0.4092,  -0.2473,
+          -1.4546,   4.0878,  -2.3483],
+        [ -9.1906,  -1.2035,   6.5348,   7.3671,   2.2837,  -2.5827,  -2.2848,
+          -2.1186,   2.2615,  -1.0666]], device='cuda:0',
+       grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 13 : tensor([[-7.0388, -2.8515,  4.8914,  7.6098,  7.2327,  4.3871, -0.6357, -1.2656,
+         -7.1966, -5.1322],
+        [ 3.0899, -1.8198,  2.9719, -0.5785,  0.4211, -3.5480,  0.9164, -2.8060,
+          2.6616, -1.3085],
+        [ 3.0207, -2.5641,  3.1827,  0.5734, -0.5919, -2.4447,  1.4487, -3.1840,
+          2.0975, -1.5382]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-10.9093,  -1.8521,   8.5514,   8.5559,   3.3396,  -2.6814,  -2.7627,
+          -2.9307,   1.9571,  -1.2673],
+        [ -5.2711,  -0.6255,   1.1979,   4.8589,  -0.6069,   0.4092,  -0.2473,
+          -1.4546,   4.0878,  -2.3483],
+        [ -5.8668,  -0.4974,   1.3770,   5.3410,  -1.3510,   0.5704,  -0.3242,
+          -1.5709,   4.5529,  -2.2306]], device='cuda:0',
+       grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 14 : tensor([[ 3.0763, -2.8414,  3.2526,  0.6530, -0.0229, -2.5268,  1.7545, -3.4585,
+          2.1342, -2.0208]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 14 : tensor([[-5.8839, -0.9109,  1.5242,  5.0397, -0.2086,  0.5756, -0.3348, -1.2270,
+          4.0155, -2.5896]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 18 : tensor([[ 2.6724, -2.6895,  2.6661,  0.7529,  0.2069, -2.8585,  1.3976, -2.8393,
+          2.2930, -1.6012],
+        [-4.5614, -3.3306,  9.8123,  1.1676,  1.4077,  1.1314,  2.1033, -1.9742,
+         -2.3386, -3.4175]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[ -5.6270,  -0.6692,   1.4674,   4.9980,  -0.1096,   0.6826,  -0.6916,
+          -1.3977,   3.4424,  -2.0951],
+        [-11.2900,  -1.1452,   6.8971,   7.4865,   3.5410,  -0.4546,  -3.4962,
+          -1.3777,   1.7456,  -1.9060]], device='cuda:0',
+       grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 18 : tensor([[ 2.6724, -2.6895,  2.6661,  0.7529,  0.2069, -2.8585,  1.3976, -2.8393,
+          2.2930, -1.6012],
+        [ 1.4491, -3.9920,  4.5642,  1.2014, -0.2640, -1.2823,  3.5016, -3.8074,
+          1.8431, -3.2136]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[-5.6270, -0.6692,  1.4674,  4.9980, -0.1096,  0.6826, -0.6916, -1.3977,
+          3.4424, -2.0951],
+        [-7.1991, -1.6050,  3.1089,  6.4573,  0.1928, -0.4209, -0.2897, -2.0646,
+          4.8172, -2.9968]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 19 : tensor([[-2.5831, -2.6194,  2.1932,  6.3362,  2.8946,  2.1473, -0.3301, -2.4938,
+         -1.4950, -4.0495],
+        [ 2.7138, -2.7027,  2.3496,  0.4438, -0.0890, -1.9379,  0.8998, -2.9481,
+          2.6282, -1.3571]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 19 : tensor([[-10.6154,  -1.1727,   7.2657,   8.0932,   3.1016,  -4.4957,  -1.8848,
+          -3.2582,   3.4012,  -0.4345],
+        [ -5.2567,  -1.1131,   1.2929,   5.1159,  -0.3857,   0.4765,  -0.6938,
+          -1.6569,   3.9680,  -1.7467]], device='cuda:0',
+       grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 20 : tensor([[ 3.0406, -2.4234,  2.4828,  0.0078,  0.1364, -2.9644,  1.1423, -3.2614,
+          2.9939, -1.1544]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 20 : tensor([[-5.5642, -0.5028,  0.9213,  4.9992, -1.1688,  0.6567, -0.0631, -1.4477,
+          4.2726, -2.1029]], device='cuda:0', grad_fn=<GatherBackward>)
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='cifar10', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='./resnet-results/netAttacker_4.pth', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+ Original prediction of clean for batch idx 0 : tensor([[ 2.8735, -2.1238,  2.2759, -0.2200,  0.7152, -3.3347,  0.8448, -3.2177,
+          3.5498, -1.3628]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.3842, -1.2371,  1.3598,  4.4695,  0.1838, -0.0592, -0.7969, -1.1327,
+          4.3297, -1.7325]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 0 : tensor([[ 3.1647, -2.3173,  3.1374,  0.0109, -0.0268, -2.9124,  1.1481, -3.2500,
+          2.4077, -1.3621]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.4934, -0.7180,  1.1664,  4.9773, -0.9660,  0.4220, -0.1788, -1.5458,
+          4.4420, -2.1054]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 2 : tensor([[ 2.6087, -3.3048,  4.0040,  1.1039, -0.3985, -1.9770,  2.7220, -3.9933,
+          1.6948, -2.4598]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 2 : tensor([[-6.1543, -0.8870,  1.4647,  5.5981,  0.0087,  0.3125, -0.4407, -1.5374,
+          3.8965, -2.2607]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 4 : tensor([[ 2.7689, -2.4781,  2.6552, -0.1945,  0.5273, -2.7431,  0.9986, -3.1596,
+          2.9239, -1.2984]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 4 : tensor([[-5.1203, -0.6357,  1.1834,  4.7717, -0.6152,  0.6186, -0.4992, -1.8138,
+          3.9279, -1.8170]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 6 : tensor([[ 2.7246, -2.9264,  3.5667,  0.7565, -0.3863, -2.4371,  2.2631, -3.4042,
+          1.9993, -2.1562]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 6 : tensor([[-6.3777, -0.8331,  1.9435,  5.6890, -1.1483,  0.2892, -0.1691, -1.5037,
+          5.0209, -2.9105]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 8 : tensor([[ 2.7655, -3.1887,  3.2523,  0.7987,  0.1029, -2.1479,  1.9833, -3.6023,
+          2.2115, -2.1750]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 8 : tensor([[-6.1359, -0.9549,  1.5787,  5.4671, -0.2758,  0.5175, -0.2229, -1.3710,
+          4.0541, -2.6568]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 13 : tensor([[ 2.1763, -3.9093,  3.7296,  1.3842,  0.1412, -1.1840,  2.8132, -4.3371,
+          2.0581, -2.8719]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-6.1793, -1.2214,  2.2334,  5.7950,  0.1269, -0.1088, -0.3894, -1.9632,
+          4.0592, -2.3522]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 13 : tensor([[ 3.0899, -1.8198,  2.9719, -0.5785,  0.4211, -3.5480,  0.9164, -2.8060,
+          2.6616, -1.3085]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-5.2875, -0.6200,  1.2205,  4.8497, -0.5934,  0.4017, -0.2619, -1.4486,
+          4.0879, -2.3482]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 13 : tensor([[ 3.0207, -2.5641,  3.1827,  0.5734, -0.5919, -2.4447,  1.4487, -3.1840,
+          2.0975, -1.5382]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-5.8850, -0.4924,  1.3993,  5.3343, -1.3450,  0.5681, -0.3388, -1.5649,
+          4.5565, -2.2318]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 14 : tensor([[ 3.0763, -2.8414,  3.2526,  0.6530, -0.0229, -2.5268,  1.7545, -3.4585,
+          2.1342, -2.0208]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 14 : tensor([[-5.9051, -0.9044,  1.5465,  5.0331, -0.2047,  0.5715, -0.3503, -1.2212,
+          4.0210, -2.5860]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 18 : tensor([[ 2.6724, -2.6895,  2.6661,  0.7529,  0.2069, -2.8585,  1.3976, -2.8393,
+          2.2930, -1.6012]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[-5.6483, -0.6646,  1.4861,  4.9993, -0.1026,  0.6784, -0.7031, -1.3892,
+          3.4379, -2.0935]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 18 : tensor([[ 1.4491, -3.9920,  4.5642,  1.2014, -0.2640, -1.2823,  3.5016, -3.8074,
+          1.8431, -3.2136]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[-7.2159, -1.6011,  3.1217,  6.4462,  0.2082, -0.4189, -0.3049, -2.0627,
+          4.8130, -2.9853]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 19 : tensor([[ 2.7138, -2.7027,  2.3496,  0.4438, -0.0890, -1.9379,  0.8998, -2.9481,
+          2.6282, -1.3571]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 19 : tensor([[-5.2852, -1.1091,  1.3128,  5.1163, -0.3791,  0.4803, -0.7090, -1.6582,
+          3.9720, -1.7405]], device='cuda:0', grad_fn=<GatherBackward>)
+ Original prediction of clean for batch idx 20 : tensor([[ 3.0406, -2.4234,  2.4828,  0.0078,  0.1364, -2.9644,  1.1423, -3.2614,
+          2.9939, -1.1544]], device='cuda:0', grad_fn=<GatherBackward>)
+Perturbed prediction of perturbed image for batch idx 20 : tensor([[-5.5914, -0.5016,  0.9447,  4.9962, -1.1630,  0.6546, -0.0750, -1.4411,
+          4.2786, -2.1018]], device='cuda:0', grad_fn=<GatherBackward>)
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='cifar10', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='./resnet-results/netAttacker_4.pth', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+ Original prediction of clean for batch idx 0 : tensor([[ 2.8735, -2.1238,  2.2759, -0.2200,  0.7152, -3.3347,  0.8448, -3.2177,
+          3.5498, -1.3628]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([8], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.3883, -1.2432,  1.3662,  4.4597,  0.1908, -0.0547, -0.7909, -1.1363,
+          4.3312, -1.7342]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 0 : tensor([[ 3.1647, -2.3173,  3.1374,  0.0109, -0.0268, -2.9124,  1.1481, -3.2500,
+          2.4077, -1.3621]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([0], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 0 : tensor([[-5.4954, -0.7228,  1.1731,  4.9632, -0.9526,  0.4130, -0.1740, -1.5399,
+          4.4416, -2.1059]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 2 : tensor([[ 2.6087, -3.3048,  4.0040,  1.1039, -0.3985, -1.9770,  2.7220, -3.9933,
+          1.6948, -2.4598]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 2 : tensor([[-6.1497, -0.8904,  1.4691,  5.5858,  0.0088,  0.3130, -0.4384, -1.5363,
+          3.8967, -2.2583]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 4 : tensor([[ 2.7689, -2.4781,  2.6552, -0.1945,  0.5273, -2.7431,  0.9986, -3.1596,
+          2.9239, -1.2984]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([8], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 4 : tensor([[-5.1168, -0.6416,  1.1871,  4.7630, -0.6113,  0.6161, -0.4995, -1.8076,
+          3.9311, -1.8202]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 6 : tensor([[ 2.7246, -2.9264,  3.5667,  0.7565, -0.3863, -2.4371,  2.2631, -3.4042,
+          1.9993, -2.1562]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 6 : tensor([[-6.3821, -0.8420,  1.9440,  5.6803, -1.1438,  0.2878, -0.1644, -1.4929,
+          5.0278, -2.9145]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 8 : tensor([[ 2.7655, -3.1887,  3.2523,  0.7987,  0.1029, -2.1479,  1.9833, -3.6023,
+          2.2115, -2.1750]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 8 : tensor([[-6.1353, -0.9589,  1.5773,  5.4545, -0.2731,  0.5166, -0.2241, -1.3638,
+          4.0630, -2.6559]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 13 : tensor([[ 2.1763, -3.9093,  3.7296,  1.3842,  0.1412, -1.1840,  2.8132, -4.3371,
+          2.0581, -2.8719]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-6.1872, -1.2355,  2.2364,  5.7922,  0.1343, -0.1134, -0.3904, -1.9600,
+          4.0662, -2.3422]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 13 : tensor([[ 3.0899, -1.8198,  2.9719, -0.5785,  0.4211, -3.5480,  0.9164, -2.8060,
+          2.6616, -1.3085]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([0], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-5.2865, -0.6212,  1.2309,  4.8360, -0.5994,  0.3955, -0.2643, -1.4437,
+          4.0971, -2.3442]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 13 : tensor([[ 3.0207, -2.5641,  3.1827,  0.5734, -0.5919, -2.4447,  1.4487, -3.1840,
+          2.0975, -1.5382]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 13 : tensor([[-5.8933, -0.4993,  1.4028,  5.3212, -1.3301,  0.5632, -0.3379, -1.5532,
+          4.5593, -2.2325]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 14 : tensor([[ 3.0763, -2.8414,  3.2526,  0.6530, -0.0229, -2.5268,  1.7545, -3.4585,
+          2.1342, -2.0208]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 14 : tensor([[-5.9100, -0.9171,  1.5538,  5.0184, -0.1935,  0.5691, -0.3511, -1.2088,
+          4.0290, -2.5897]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 18 : tensor([[ 2.6724, -2.6895,  2.6661,  0.7529,  0.2069, -2.8585,  1.3976, -2.8393,
+          2.2930, -1.6012]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([0], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[-5.6583, -0.6668,  1.4870,  4.9882, -0.1029,  0.6800, -0.7030, -1.3743,
+          3.4451, -2.0946]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 18 : tensor([[ 1.4491, -3.9920,  4.5642,  1.2014, -0.2640, -1.2823,  3.5016, -3.8074,
+          1.8431, -3.2136]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([2], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 18 : tensor([[-7.2246, -1.6053,  3.1231,  6.4309,  0.2157, -0.4196, -0.3137, -2.0433,
+          4.8200, -2.9831]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 19 : tensor([[ 2.7138, -2.7027,  2.3496,  0.4438, -0.0890, -1.9379,  0.8998, -2.9481,
+          2.6282, -1.3571]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([0], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 19 : tensor([[-5.2723, -1.1100,  1.3206,  5.0960, -0.3719,  0.4681, -0.7108, -1.6434,
+          3.9713, -1.7472]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
+ Original prediction of clean for batch idx 20 : tensor([[ 3.0406, -2.4234,  2.4828,  0.0078,  0.1364, -2.9644,  1.1423, -3.2614,
+          2.9939, -1.1544]], device='cuda:0', grad_fn=<GatherBackward>), with predicted class tensor([0], device='cuda:0')
+Perturbed prediction of perturbed image for batch idx 20 : tensor([[-5.5937, -0.5053,  0.9511,  4.9814, -1.1566,  0.6501, -0.0746, -1.4315,
+          4.2826, -2.1032]], device='cuda:0', grad_fn=<GatherBackward>) with predicted class tensor([3], device='cuda:0')
