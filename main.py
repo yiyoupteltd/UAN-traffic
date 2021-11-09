@@ -501,6 +501,12 @@ if __name__ == '__main__':
     c = opt.shrink
     min_val, max_val = find_boundaries(trainloader)
     print(min_val, max_val)
+    if not os.path.isdir('checkpoint'):
+        os.mkdir('checkpoint')
+    if not os.path.isdir('classifications'):
+        os.mkdir('classifications')
+    if not os.path.isdir('resnet-results'):
+        os.mkdir('resnet-results')
     for epoch in range(1, opt.epochs + 1):
         print('epoch: ' + str(epoch))
         start = time.time()
