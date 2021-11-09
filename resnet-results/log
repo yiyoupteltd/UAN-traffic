@@ -1,0 +1,237 @@
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+Namespace(batchSize=4, beta1=0.5, chosen_target_class=0, cuda=True, dataset='', epochs=200, every=2, imageSize=56, l2reg=1e-05, ldist_weight=4.0, lr=0.0002, manualSeed=5198, max_norm=0.04, netAttacker='', netClassifier='./checkpoint/ckpt.pth', ngpu=1, norm='linf', nz=100, optimize_on_success=0, outf='resnet-results', restrict_to_correct_preds=1, shrink=0.00075, shrink_inc=0.0001, targeted=0, workers=2)
+Tr Epoch 1 batch_idx 0 C_L 11.05714 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 1 C_L 11.03037 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 2 C_L 10.96930 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 3 C_L 10.69209 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 4 C_L 10.36494 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 5 C_L 10.76518 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 6 C_L 10.67268 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 7 C_L 10.45751 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Tr Epoch 1 batch_idx 8 C_L 10.80181 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 2.8%
+Tr Epoch 1 batch_idx 9 C_L 10.72699 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 2.5%
+Tr Epoch 1 batch_idx 10 C_L 11.07999 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 2.3%
+Tr Epoch 1 batch_idx 11 C_L 11.03612 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 2.1%
+Tr Epoch 1 batch_idx 12 C_L 11.02132 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.9%
+Tr Epoch 1 batch_idx 13 C_L 10.90381 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.8%
+Tr Epoch 1 batch_idx 14 C_L 10.86858 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.7%
+Tr Epoch 1 batch_idx 15 C_L 10.71937 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.6%
+Tr Epoch 1 batch_idx 16 C_L 10.68935 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.5%
+Tr Epoch 1 batch_idx 17 C_L 10.59534 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.4%
+Tr Epoch 1 batch_idx 18 C_L 10.67597 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.3%
+Tr Epoch 1 batch_idx 19 C_L 10.60044 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.2%
+Tr Epoch 1 batch_idx 20 C_L 10.57310 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.2%
+Tr Epoch 1 batch_idx 21 C_L 10.65522 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.1%
+Tr Epoch 1 batch_idx 22 C_L 10.70733 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.1%
+Tr Epoch 1 batch_idx 23 C_L 10.65545 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.0%
+Tr Epoch 1 batch_idx 24 C_L 10.57759 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.0%
+Tr Epoch 1 batch_idx 25 C_L 10.54010 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 1.0%
+Tr Epoch 1 batch_idx 26 C_L 10.55221 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.9%
+Tr Epoch 1 batch_idx 27 C_L 10.55605 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.9%
+Tr Epoch 1 batch_idx 28 C_L 10.51649 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.9%
+Tr Epoch 1 batch_idx 29 C_L 10.55381 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.8%
+Tr Epoch 1 batch_idx 30 C_L 10.52120 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.8%
+Tr Epoch 1 batch_idx 31 C_L 10.55284 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.8%
+Tr Epoch 1 batch_idx 32 C_L 10.57198 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.8%
+Tr Epoch 1 batch_idx 33 C_L 10.54563 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.7%
+Tr Epoch 1 batch_idx 34 C_L 10.53921 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.7%
+Tr Epoch 1 batch_idx 35 C_L 10.60101 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.7%
+Tr Epoch 1 batch_idx 36 C_L 10.56262 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.7%
+Tr Epoch 1 batch_idx 37 C_L 10.59324 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.7%
+Tr Epoch 1 batch_idx 38 C_L 10.57967 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 39 C_L 10.62983 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 40 C_L 10.76649 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 41 C_L 10.80959 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 42 C_L 10.79958 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 43 C_L 10.79530 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 44 C_L 10.78533 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.6%
+Tr Epoch 1 batch_idx 45 C_L 10.75799 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 46 C_L 10.72594 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 47 C_L 10.68219 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 48 C_L 10.66927 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 49 C_L 10.65355 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 50 C_L 10.72613 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 51 C_L 10.72564 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 52 C_L 10.69785 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 53 C_L 10.66537 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 54 C_L 10.66032 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.5%
+Tr Epoch 1 batch_idx 55 C_L 10.65721 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 56 C_L 10.68637 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 57 C_L 10.64552 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 58 C_L 10.63630 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 59 C_L 10.60424 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 60 C_L 10.64247 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 61 C_L 10.56487 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 62 C_L 10.51485 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 63 C_L 10.35056 A_Succ 0.01569 L_inf 0.16552 L2 0.21104 (Pert 6.20, Adv 30.94, Clean 30.75) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 64 C_L 10.30751 A_Succ 0.01931 L_inf 0.17141 L2 0.21087 (Pert 6.42, Adv 31.80, Clean 31.57) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 65 C_L 10.32511 A_Succ 0.02281 L_inf 0.17838 L2 0.20957 (Pert 6.71, Adv 33.27, Clean 33.00) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 66 C_L 10.23578 A_Succ 0.02622 L_inf 0.18172 L2 0.20550 (Pert 6.89, Adv 34.81, Clean 34.54) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 67 C_L 10.09980 A_Succ 0.03690 L_inf 0.20100 L2 0.27138 (Pert 7.67, Adv 31.51, Clean 30.90) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 68 C_L 10.14072 A_Succ 0.04727 L_inf 0.24013 L2 0.29006 (Pert 9.24, Adv 34.66, Clean 33.91) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 69 C_L 9.99585 A_Succ 0.06093 L_inf 0.26340 L2 0.35291 (Pert 10.04, Adv 32.72, Clean 31.51) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 70 C_L 10.01221 A_Succ 0.07067 L_inf 0.27683 L2 0.40316 (Pert 10.45, Adv 31.55, Clean 30.08) C 0.000750 Skipped 0.4%
+Tr Epoch 1 batch_idx 71 C_L 9.99954 A_Succ 0.08014 L_inf 0.28374 L2 0.42968 (Pert 10.71, Adv 30.55, Clean 28.94) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 72 C_L 10.05471 A_Succ 0.08935 L_inf 0.29198 L2 0.44138 (Pert 11.04, Adv 30.43, Clean 28.72) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 73 C_L 10.00116 A_Succ 0.09492 L_inf 0.29354 L2 0.44988 (Pert 11.07, Adv 30.19, Clean 28.45) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 74 C_L 9.93772 A_Succ 0.10368 L_inf 0.29221 L2 0.45534 (Pert 11.00, Adv 29.48, Clean 27.71) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 75 C_L 9.81421 A_Succ 0.11221 L_inf 0.29265 L2 0.44119 (Pert 11.11, Adv 30.65, Clean 28.96) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 76 C_L 9.79216 A_Succ 0.11401 L_inf 0.29727 L2 0.46290 (Pert 11.23, Adv 30.32, Clean 28.50) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 77 C_L 9.73957 A_Succ 0.12219 L_inf 0.30426 L2 0.47413 (Pert 11.52, Adv 30.42, Clean 28.53) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 78 C_L 9.61628 A_Succ 0.13333 L_inf 0.31554 L2 0.50093 (Pert 11.92, Adv 30.25, Clean 28.12) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 79 C_L 9.49608 A_Succ 0.14420 L_inf 0.32438 L2 0.52515 (Pert 12.19, Adv 29.72, Clean 27.41) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 80 C_L 9.38932 A_Succ 0.15170 L_inf 0.32729 L2 0.53161 (Pert 12.28, Adv 29.52, Clean 27.19) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 81 C_L 9.32742 A_Succ 0.15902 L_inf 0.33348 L2 0.53381 (Pert 12.52, Adv 29.95, Clean 27.55) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 82 C_L 9.32859 A_Succ 0.16616 L_inf 0.33969 L2 0.54154 (Pert 12.78, Adv 29.97, Clean 27.48) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 83 C_L 9.21753 A_Succ 0.17612 L_inf 0.33805 L2 0.53695 (Pert 12.75, Adv 29.99, Clean 27.54) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 84 C_L 9.24080 A_Succ 0.18289 L_inf 0.33699 L2 0.53780 (Pert 12.72, Adv 29.72, Clean 27.27) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 85 C_L 9.25489 A_Succ 0.18659 L_inf 0.33570 L2 0.53867 (Pert 12.68, Adv 29.51, Clean 27.07) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 86 C_L 9.14851 A_Succ 0.19597 L_inf 0.32950 L2 0.52971 (Pert 12.47, Adv 29.45, Clean 27.09) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 87 C_L 9.14620 A_Succ 0.20228 L_inf 0.32583 L2 0.52147 (Pert 12.36, Adv 29.57, Clean 27.27) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 88 C_L 9.19682 A_Succ 0.20845 L_inf 0.31974 L2 0.51121 (Pert 12.15, Adv 29.49, Clean 27.27) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 89 C_L 9.09463 A_Succ 0.21727 L_inf 0.31221 L2 0.49887 (Pert 11.89, Adv 29.43, Clean 27.30) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 90 C_L 9.07037 A_Succ 0.21488 L_inf 0.31221 L2 0.49887 (Pert 11.89, Adv 29.43, Clean 27.30) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 91 C_L 9.07267 A_Succ 0.22071 L_inf 0.30744 L2 0.49109 (Pert 11.72, Adv 29.33, Clean 27.25) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 92 C_L 8.99537 A_Succ 0.22372 L_inf 0.30419 L2 0.48475 (Pert 11.61, Adv 29.47, Clean 27.44) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 93 C_L 8.98951 A_Succ 0.22933 L_inf 0.30149 L2 0.48372 (Pert 11.51, Adv 29.16, Clean 27.15) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 94 C_L 8.97441 A_Succ 0.23219 L_inf 0.30004 L2 0.47839 (Pert 11.48, Adv 29.43, Clean 27.46) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 95 C_L 8.96607 A_Succ 0.23760 L_inf 0.29882 L2 0.47932 (Pert 11.44, Adv 29.29, Clean 27.34) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 96 C_L 8.87364 A_Succ 0.24548 L_inf 0.29601 L2 0.47499 (Pert 11.37, Adv 29.23, Clean 27.32) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 97 C_L 8.87183 A_Succ 0.24552 L_inf 0.29540 L2 0.47452 (Pert 11.36, Adv 29.17, Clean 27.27) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 98 C_L 8.85816 A_Succ 0.24557 L_inf 0.29503 L2 0.47284 (Pert 11.36, Adv 29.26, Clean 27.37) C 0.000750 Skipped 0.3%
+Tr Epoch 1 batch_idx 99 C_L 8.78504 A_Succ 0.24812 L_inf 0.29408 L2 0.47020 (Pert 11.34, Adv 29.37, Clean 27.49) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 100 C_L 8.80666 A_Succ 0.25062 L_inf 0.29442 L2 0.46974 (Pert 11.38, Adv 29.43, Clean 27.56) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 101 C_L 8.72032 A_Succ 0.25799 L_inf 0.29684 L2 0.47684 (Pert 11.50, Adv 29.43, Clean 27.52) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 102 C_L 8.63566 A_Succ 0.26521 L_inf 0.29826 L2 0.47634 (Pert 11.61, Adv 29.64, Clean 27.73) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 103 C_L 8.64724 A_Succ 0.26747 L_inf 0.29818 L2 0.47505 (Pert 11.63, Adv 29.73, Clean 27.83) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 104 C_L 8.58050 A_Succ 0.27208 L_inf 0.29899 L2 0.47947 (Pert 11.67, Adv 29.65, Clean 27.71) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 105 C_L 8.58254 A_Succ 0.27423 L_inf 0.30003 L2 0.47947 (Pert 11.74, Adv 29.77, Clean 27.83) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 106 C_L 8.58252 A_Succ 0.27869 L_inf 0.30067 L2 0.48387 (Pert 11.77, Adv 29.62, Clean 27.66) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 107 C_L 8.58789 A_Succ 0.28306 L_inf 0.30098 L2 0.48970 (Pert 11.78, Adv 29.43, Clean 27.43) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 108 C_L 8.61786 A_Succ 0.28736 L_inf 0.30043 L2 0.48778 (Pert 11.77, Adv 29.45, Clean 27.48) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 109 C_L 8.59206 A_Succ 0.28474 L_inf 0.30043 L2 0.48778 (Pert 11.77, Adv 29.45, Clean 27.48) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 110 C_L 8.56158 A_Succ 0.28894 L_inf 0.29957 L2 0.48851 (Pert 11.75, Adv 29.30, Clean 27.33) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 111 C_L 8.51284 A_Succ 0.29083 L_inf 0.30075 L2 0.48802 (Pert 11.83, Adv 29.45, Clean 27.48) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 112 C_L 8.50132 A_Succ 0.29268 L_inf 0.30198 L2 0.49126 (Pert 11.88, Adv 29.40, Clean 27.40) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 113 C_L 8.42675 A_Succ 0.29890 L_inf 0.30513 L2 0.49756 (Pert 12.01, Adv 29.52, Clean 27.48) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 114 C_L 8.35347 A_Succ 0.30501 L_inf 0.30776 L2 0.50207 (Pert 12.13, Adv 29.52, Clean 27.42) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 115 C_L 8.32954 A_Succ 0.30886 L_inf 0.30896 L2 0.50106 (Pert 12.20, Adv 29.71, Clean 27.62) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 116 C_L 8.25835 A_Succ 0.31478 L_inf 0.31135 L2 0.50344 (Pert 12.32, Adv 29.81, Clean 27.68) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 117 C_L 8.18836 A_Succ 0.32059 L_inf 0.31383 L2 0.50807 (Pert 12.41, Adv 29.82, Clean 27.66) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 118 C_L 8.19349 A_Succ 0.32421 L_inf 0.31492 L2 0.51448 (Pert 12.43, Adv 29.63, Clean 27.44) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 119 C_L 8.12521 A_Succ 0.32985 L_inf 0.31725 L2 0.52777 (Pert 12.50, Adv 29.42, Clean 27.15) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 120 C_L 8.05806 A_Succ 0.33540 L_inf 0.31947 L2 0.53188 (Pert 12.59, Adv 29.38, Clean 27.06) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 121 C_L 7.99201 A_Succ 0.34086 L_inf 0.32159 L2 0.54179 (Pert 12.66, Adv 29.24, Clean 26.88) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 122 C_L 7.98793 A_Succ 0.34216 L_inf 0.32277 L2 0.53952 (Pert 12.71, Adv 29.48, Clean 27.13) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 123 C_L 7.98997 A_Succ 0.34141 L_inf 0.32314 L2 0.53840 (Pert 12.73, Adv 29.60, Clean 27.26) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 124 C_L 7.94970 A_Succ 0.34469 L_inf 0.32357 L2 0.54487 (Pert 12.73, Adv 29.41, Clean 27.04) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 125 C_L 7.89851 A_Succ 0.34791 L_inf 0.32390 L2 0.54413 (Pert 12.77, Adv 29.46, Clean 27.09) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 126 C_L 7.86294 A_Succ 0.34911 L_inf 0.32417 L2 0.54680 (Pert 12.78, Adv 29.37, Clean 26.98) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 127 C_L 7.85103 A_Succ 0.35029 L_inf 0.32513 L2 0.54655 (Pert 12.83, Adv 29.47, Clean 27.08) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 128 C_L 7.82791 A_Succ 0.35340 L_inf 0.32578 L2 0.54778 (Pert 12.86, Adv 29.45, Clean 27.05) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 129 C_L 7.79000 A_Succ 0.35645 L_inf 0.32697 L2 0.54936 (Pert 12.92, Adv 29.44, Clean 27.02) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 130 C_L 7.73054 A_Succ 0.36138 L_inf 0.32921 L2 0.55105 (Pert 13.02, Adv 29.57, Clean 27.12) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 131 C_L 7.74555 A_Succ 0.36243 L_inf 0.32963 L2 0.55224 (Pert 13.03, Adv 29.52, Clean 27.07) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 132 C_L 7.75504 A_Succ 0.36347 L_inf 0.32965 L2 0.55230 (Pert 13.03, Adv 29.53, Clean 27.07) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 133 C_L 7.77637 A_Succ 0.36636 L_inf 0.32899 L2 0.55002 (Pert 13.02, Adv 29.63, Clean 27.19) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 134 C_L 7.72771 A_Succ 0.36920 L_inf 0.32777 L2 0.54768 (Pert 12.98, Adv 29.64, Clean 27.22) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 135 C_L 7.67088 A_Succ 0.37385 L_inf 0.32715 L2 0.54660 (Pert 12.97, Adv 29.61, Clean 27.20) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 136 C_L 7.66829 A_Succ 0.37660 L_inf 0.32683 L2 0.54585 (Pert 12.97, Adv 29.58, Clean 27.18) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 137 C_L 7.64584 A_Succ 0.37387 L_inf 0.32683 L2 0.54585 (Pert 12.97, Adv 29.58, Clean 27.18) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 138 C_L 7.59083 A_Succ 0.37838 L_inf 0.32618 L2 0.54405 (Pert 12.96, Adv 29.62, Clean 27.23) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 139 C_L 7.53661 A_Succ 0.38283 L_inf 0.32562 L2 0.54359 (Pert 12.95, Adv 29.59, Clean 27.21) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 140 C_L 7.54196 A_Succ 0.38366 L_inf 0.32563 L2 0.54380 (Pert 12.95, Adv 29.57, Clean 27.19) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 141 C_L 7.48885 A_Succ 0.38801 L_inf 0.32445 L2 0.54252 (Pert 12.92, Adv 29.52, Clean 27.16) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 142 C_L 7.48857 A_Succ 0.38879 L_inf 0.32420 L2 0.54202 (Pert 12.91, Adv 29.50, Clean 27.15) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 143 C_L 7.43657 A_Succ 0.39304 L_inf 0.32277 L2 0.53935 (Pert 12.87, Adv 29.48, Clean 27.14) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 144 C_L 7.38528 A_Succ 0.39724 L_inf 0.32166 L2 0.53921 (Pert 12.83, Adv 29.36, Clean 27.04) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 145 C_L 7.35248 A_Succ 0.39966 L_inf 0.32081 L2 0.53725 (Pert 12.80, Adv 29.40, Clean 27.10) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 146 C_L 7.39104 A_Succ 0.40034 L_inf 0.32042 L2 0.53789 (Pert 12.79, Adv 29.33, Clean 27.02) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 147 C_L 7.38112 A_Succ 0.40271 L_inf 0.31959 L2 0.53600 (Pert 12.77, Adv 29.35, Clean 27.06) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 148 C_L 7.33158 A_Succ 0.40672 L_inf 0.31890 L2 0.53542 (Pert 12.75, Adv 29.31, Clean 27.03) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 149 C_L 7.31468 A_Succ 0.40902 L_inf 0.31850 L2 0.53417 (Pert 12.75, Adv 29.33, Clean 27.06) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 150 C_L 7.26624 A_Succ 0.41294 L_inf 0.31839 L2 0.53465 (Pert 12.75, Adv 29.32, Clean 27.05) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 151 C_L 7.21844 A_Succ 0.41680 L_inf 0.31837 L2 0.53595 (Pert 12.76, Adv 29.25, Clean 26.96) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 152 C_L 7.17981 A_Succ 0.41899 L_inf 0.31799 L2 0.53693 (Pert 12.74, Adv 29.15, Clean 26.86) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 153 C_L 7.14036 A_Succ 0.42114 L_inf 0.31787 L2 0.53542 (Pert 12.75, Adv 29.22, Clean 26.94) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 154 C_L 7.11732 A_Succ 0.42165 L_inf 0.31793 L2 0.53496 (Pert 12.76, Adv 29.27, Clean 26.99) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 155 C_L 7.13029 A_Succ 0.42215 L_inf 0.31781 L2 0.53481 (Pert 12.76, Adv 29.25, Clean 26.98) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 156 C_L 7.09442 A_Succ 0.42265 L_inf 0.31737 L2 0.53468 (Pert 12.74, Adv 29.21, Clean 26.93) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 157 C_L 7.04952 A_Succ 0.42631 L_inf 0.31713 L2 0.53693 (Pert 12.73, Adv 29.09, Clean 26.82) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 158 C_L 7.00518 A_Succ 0.42992 L_inf 0.31712 L2 0.53643 (Pert 12.74, Adv 29.11, Clean 26.84) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 159 C_L 7.00199 A_Succ 0.43192 L_inf 0.31717 L2 0.53542 (Pert 12.76, Adv 29.17, Clean 26.91) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 160 C_L 7.02784 A_Succ 0.43235 L_inf 0.31733 L2 0.53539 (Pert 12.77, Adv 29.18, Clean 26.92) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 161 C_L 7.00657 A_Succ 0.43431 L_inf 0.31707 L2 0.53373 (Pert 12.77, Adv 29.24, Clean 26.99) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 162 C_L 6.98996 A_Succ 0.43472 L_inf 0.31650 L2 0.53274 (Pert 12.75, Adv 29.22, Clean 26.98) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 163 C_L 6.98641 A_Succ 0.43511 L_inf 0.31643 L2 0.53129 (Pert 12.76, Adv 29.32, Clean 27.08) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 164 C_L 7.01672 A_Succ 0.43551 L_inf 0.31617 L2 0.52979 (Pert 12.76, Adv 29.40, Clean 27.17) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 165 C_L 7.02881 A_Succ 0.43590 L_inf 0.31636 L2 0.53092 (Pert 12.76, Adv 29.42, Clean 27.18) C 0.000750 Skipped 0.2%
+Tr Epoch 1 batch_idx 166 C_L 7.01138 A_Succ 0.43628 L_inf 0.31669 L2 0.52998 (Pert 12.78, Adv 29.50, Clean 27.27) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 167 C_L 6.99902 A_Succ 0.43815 L_inf 0.31742 L2 0.53311 (Pert 12.81, Adv 29.44, Clean 27.19) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 168 C_L 7.00911 A_Succ 0.43852 L_inf 0.31776 L2 0.53319 (Pert 12.83, Adv 29.47, Clean 27.21) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 169 C_L 7.01033 A_Succ 0.44035 L_inf 0.31841 L2 0.53538 (Pert 12.85, Adv 29.43, Clean 27.16) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 170 C_L 6.96933 A_Succ 0.44363 L_inf 0.31910 L2 0.53639 (Pert 12.88, Adv 29.43, Clean 27.15) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 171 C_L 6.92881 A_Succ 0.44687 L_inf 0.31982 L2 0.53993 (Pert 12.91, Adv 29.35, Clean 27.04) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 172 C_L 6.88876 A_Succ 0.45007 L_inf 0.32013 L2 0.54201 (Pert 12.92, Adv 29.33, Clean 27.01) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 173 C_L 6.84917 A_Succ 0.45324 L_inf 0.32110 L2 0.54765 (Pert 12.95, Adv 29.23, Clean 26.88) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 174 C_L 6.81003 A_Succ 0.45637 L_inf 0.32208 L2 0.54810 (Pert 13.00, Adv 29.30, Clean 26.94) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 175 C_L 6.79424 A_Succ 0.45661 L_inf 0.32233 L2 0.54691 (Pert 13.02, Adv 29.41, Clean 27.05) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 176 C_L 6.76419 A_Succ 0.45827 L_inf 0.32277 L2 0.54772 (Pert 13.03, Adv 29.43, Clean 27.07) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 177 C_L 6.79036 A_Succ 0.45992 L_inf 0.32307 L2 0.54827 (Pert 13.05, Adv 29.42, Clean 27.05) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 178 C_L 6.75242 A_Succ 0.46294 L_inf 0.32367 L2 0.54930 (Pert 13.08, Adv 29.40, Clean 27.02) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 179 C_L 6.75347 A_Succ 0.46314 L_inf 0.32403 L2 0.54890 (Pert 13.10, Adv 29.45, Clean 27.07) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 180 C_L 6.71616 A_Succ 0.46611 L_inf 0.32496 L2 0.54860 (Pert 13.15, Adv 29.56, Clean 27.17) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 181 C_L 6.67926 A_Succ 0.46905 L_inf 0.32591 L2 0.55147 (Pert 13.18, Adv 29.52, Clean 27.11) C 0.000750 Skipped 0.1%
+Tr Epoch 1 batch_idx 182 C_L 6.66201 A_Succ 0.46986 L_inf 0.32636 L2 0.55134 (Pert 13.20, Adv 29.57, Clean 27.16) C 0.000750 Skipped 0.1%
+Val Epoch 1 batch_idx 0 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 1 A_Succ 0.00000 L_inf nan L2 nan (Pert nan, Adv nan, Clean nan) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 2 A_Succ 0.08333 L_inf 0.45191 L2 0.69529 (Pert 18.91, Adv 31.57, Clean 27.20) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 3 A_Succ 0.31250 L_inf 0.43990 L2 0.69258 (Pert 18.32, Adv 30.58, Clean 26.47) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 4 A_Succ 0.45000 L_inf 0.42711 L2 0.68431 (Pert 17.32, Adv 28.99, Clean 25.33) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 5 A_Succ 0.54167 L_inf 0.42778 L2 0.68232 (Pert 17.50, Adv 29.44, Clean 25.68) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 6 A_Succ 0.60714 L_inf 0.43040 L2 0.65362 (Pert 17.55, Adv 31.00, Clean 27.47) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 7 A_Succ 0.65625 L_inf 0.43280 L2 0.62204 (Pert 17.59, Adv 32.67, Clean 29.22) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 8 A_Succ 0.69444 L_inf 0.44132 L2 0.58208 (Pert 17.85, Adv 35.85, Clean 32.89) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 9 A_Succ 0.72500 L_inf 0.43673 L2 0.58555 (Pert 17.59, Adv 35.13, Clean 32.19) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 10 A_Succ 0.75000 L_inf 0.43536 L2 0.58981 (Pert 17.62, Adv 34.88, Clean 31.78) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 11 A_Succ 0.77083 L_inf 0.43636 L2 0.60059 (Pert 17.74, Adv 34.55, Clean 31.28) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 12 A_Succ 0.78846 L_inf 0.43429 L2 0.60198 (Pert 17.72, Adv 34.36, Clean 31.01) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 13 A_Succ 0.80357 L_inf 0.42928 L2 0.60218 (Pert 17.58, Adv 33.96, Clean 30.62) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 14 A_Succ 0.81667 L_inf 0.42865 L2 0.60557 (Pert 17.59, Adv 33.82, Clean 30.40) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 15 A_Succ 0.82812 L_inf 0.42637 L2 0.60622 (Pert 17.54, Adv 33.63, Clean 30.19) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 16 A_Succ 0.83824 L_inf 0.42492 L2 0.61009 (Pert 17.51, Adv 33.38, Clean 29.89) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 17 A_Succ 0.84722 L_inf 0.42387 L2 0.61184 (Pert 17.49, Adv 33.24, Clean 29.72) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 18 A_Succ 0.85526 L_inf 0.42170 L2 0.61492 (Pert 17.42, Adv 32.95, Clean 29.41) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 19 A_Succ 0.86250 L_inf 0.42061 L2 0.61709 (Pert 17.40, Adv 32.79, Clean 29.22) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 20 A_Succ 0.86905 L_inf 0.41865 L2 0.61922 (Pert 17.33, Adv 32.55, Clean 28.97) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 21 A_Succ 0.87500 L_inf 0.41798 L2 0.62263 (Pert 17.31, Adv 32.36, Clean 28.75) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 22 A_Succ 0.88043 L_inf 0.41768 L2 0.62472 (Pert 17.30, Adv 32.25, Clean 28.61) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 23 A_Succ 0.88542 L_inf 0.41844 L2 0.62976 (Pert 17.33, Adv 32.11, Clean 28.42) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 24 A_Succ 0.89000 L_inf 0.41786 L2 0.63247 (Pert 17.32, Adv 31.95, Clean 28.25) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 25 A_Succ 0.89423 L_inf 0.41650 L2 0.63271 (Pert 17.27, Adv 31.83, Clean 28.13) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 26 A_Succ 0.89815 L_inf 0.41632 L2 0.63549 (Pert 17.27, Adv 31.71, Clean 27.98) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 27 A_Succ 0.90179 L_inf 0.41767 L2 0.63915 (Pert 17.32, Adv 31.66, Clean 27.89) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 28 A_Succ 0.90517 L_inf 0.41786 L2 0.64023 (Pert 17.35, Adv 31.66, Clean 27.86) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 29 A_Succ 0.90833 L_inf 0.41930 L2 0.64866 (Pert 17.37, Adv 31.41, Clean 27.60) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 30 A_Succ 0.91129 L_inf 0.41983 L2 0.65313 (Pert 17.38, Adv 31.29, Clean 27.45) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 31 A_Succ 0.91406 L_inf 0.41944 L2 0.65667 (Pert 17.36, Adv 31.09, Clean 27.27) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 32 A_Succ 0.91667 L_inf 0.41964 L2 0.66004 (Pert 17.33, Adv 30.96, Clean 27.14) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 33 A_Succ 0.91912 L_inf 0.41935 L2 0.65522 (Pert 17.31, Adv 31.11, Clean 27.32) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 34 A_Succ 0.90000 L_inf 0.41974 L2 0.65482 (Pert 17.33, Adv 31.16, Clean 27.37) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 35 A_Succ 0.90278 L_inf 0.41961 L2 0.65375 (Pert 17.32, Adv 31.21, Clean 27.42) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 36 A_Succ 0.90541 L_inf 0.41882 L2 0.65588 (Pert 17.29, Adv 31.09, Clean 27.28) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 37 A_Succ 0.90789 L_inf 0.41812 L2 0.65773 (Pert 17.27, Adv 30.98, Clean 27.15) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 38 A_Succ 0.91026 L_inf 0.41799 L2 0.66037 (Pert 17.27, Adv 30.89, Clean 27.03) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 39 A_Succ 0.91250 L_inf 0.41796 L2 0.66314 (Pert 17.28, Adv 30.82, Clean 26.92) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 40 A_Succ 0.91463 L_inf 0.41752 L2 0.66498 (Pert 17.26, Adv 30.73, Clean 26.82) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 41 A_Succ 0.91667 L_inf 0.41749 L2 0.66744 (Pert 17.26, Adv 30.65, Clean 26.71) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 42 A_Succ 0.90698 L_inf 0.41748 L2 0.66759 (Pert 17.27, Adv 30.65, Clean 26.71) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 43 A_Succ 0.88636 L_inf 0.41748 L2 0.66759 (Pert 17.27, Adv 30.65, Clean 26.71) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 44 A_Succ 0.87222 L_inf 0.41755 L2 0.66728 (Pert 17.28, Adv 30.68, Clean 26.74) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 45 A_Succ 0.85870 L_inf 0.41806 L2 0.66759 (Pert 17.30, Adv 30.69, Clean 26.75) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 46 A_Succ 0.84574 L_inf 0.41821 L2 0.66779 (Pert 17.31, Adv 30.69, Clean 26.74) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 47 A_Succ 0.83333 L_inf 0.41823 L2 0.66779 (Pert 17.31, Adv 30.69, Clean 26.74) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 48 A_Succ 0.81633 L_inf 0.41823 L2 0.66779 (Pert 17.31, Adv 30.69, Clean 26.74) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 49 A_Succ 0.80000 L_inf 0.41823 L2 0.66779 (Pert 17.31, Adv 30.69, Clean 26.74) C 0.000750 Skipped 0.0%
+Val Epoch 1 batch_idx 50 A_Succ 0.79602 L_inf 0.41823 L2 0.66779 (Pert 17.31, Adv 30.69, Clean 26.74) C 0.000750 Skipped 0.0%

@@ -61,7 +61,7 @@ parser.add_argument('--netClassifier', default='./checkpoint/ckpt.pth', help="Fo
                                                                              For ImageNet: type of classifier (e.g. inceptionV3)")
 parser.add_argument('--outf', default='./logs', help='folder to output images and model checkpoints')
 parser.add_argument('--manualSeed', type=int, default=5198, help='manual seed')
-parser.add_argument('--dataset', type=str, default='ImageNet', help='dataset images path')
+parser.add_argument('--dataset', type=str, default='', help='dataset images path')
 
 opt = parser.parse_args()
 print(opt)
@@ -468,21 +468,21 @@ def test(epoch, c, noise):
                 adv_norm.append(adv_norm_s)
                 L_inf.append(linf)
                 
-                if batch_idx <= 20:
+                #if batch_idx <= 20:
                     #for i, adv_idx in enumerate(batch_idx):
                         #try to get predictions of clean ------------------------------------
             
-                    prediction = netClassifier(clean)
-                    print(Fore.LIGHTCYAN_EX + 'clean prediction: ' + str(prediction) + ' --------------------------------')
-                    vutils.save_image(clean, './{}/{}_{}_clean.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
-                    WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s, with predicted class %s" %(batch_idx, prediction,prediction.data.max(1)[1]))
-                    
-                    #try to get prediction of perturbed ----------------------------------
-                    adv_prediction = netClassifier(adv)
-                    print(Fore.LIGHTRED_EX + 'perturbed prediction: ' + str(adv_prediction) + ' --------------------------------')
-                    vutils.save_image(adv, './{}/{}_{}_perturbed.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
-                    WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s with predicted class %s" %(batch_idx, adv_prediction, adv_prediction.data.max(1)[1]))
-                    vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}combined.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                prediction = netClassifier(clean)
+                print(Fore.LIGHTCYAN_EX + 'clean prediction: ' + str(prediction) + ' --------------------------------')
+                vutils.save_image(clean, './{}/{}_{}_clean.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                WriteToFile('./%s/classifications' %(opt.outf),  " Original prediction of clean for batch idx %s : %s, with predicted class %s" %(batch_idx, prediction,prediction.data.max(1)[1]))
+                
+                #try to get prediction of perturbed ----------------------------------
+                adv_prediction = netClassifier(adv)
+                print(Fore.LIGHTRED_EX + 'perturbed prediction: ' + str(adv_prediction) + ' --------------------------------')
+                vutils.save_image(adv, './{}/{}_{}_perturbed.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
+                WriteToFile('./%s/classifications' %(opt.outf),  "Perturbed prediction of perturbed image for batch idx %s : %s with predicted class %s" %(batch_idx, adv_prediction, adv_prediction.data.max(1)[1]))
+                vutils.save_image(torch.cat((clean,pert,adv)), './{}/{}_{}combined.png'.format('classifications', batch_idx, i), normalize=True, scale_each=True)
                 
         #no image saved here, unlike train ---------------------------------------------------------------------------------------------------------        
         progress_bar(batch_idx, len(testloader), "Val E%s, A_Succ %.5f L_inf %.5f L2 %.5f (Pert %.2f, Adv %.2f, Clean %.2f) C %.6f Skipped %.1f%%" %(epoch, success_count/total_count, np.mean(L_inf), np.mean(dist), np.mean(pert_norm), np.mean(adv_norm), np.mean(non_adv_norm), c, 100*(skipped/(skipped+no_skipped)))) 
@@ -524,4 +524,6 @@ if __name__ == '__main__':
         if epoch > 2:
             if ( prev_pred - curr_pred ) >= 0:
                 c += opt.shrink_inc
+    torch.save(netAttacker.state_dict(), '%s/netAttacker_%s.pth' % (opt.outf, epoch))
     test(epoch, c, noise)
+    
